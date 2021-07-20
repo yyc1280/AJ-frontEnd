@@ -21,6 +21,7 @@ const App = () => {
 
   useEffect(() => {
     authCheck()
+ 
       .then(res => {
         setUser(res.data.user)
         setAuth(true)
