@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Card from "./Card"
 import Slide from "./Slide"
+import { dataContext } from "../context"
 
-const Category = ({ products, user, cart, setCart }) => {
+const Category = () => {
+  const { products, user, cart, setCart } = useContext(dataContext)
+
   const { category } = useParams()
   const [itemList, setItemList] = useState([])
   useEffect(() => {
@@ -11,7 +14,7 @@ const Category = ({ products, user, cart, setCart }) => {
   }, [products, category])
 
   return (
-    <div className="p-5 m-2 d-flex flex-column align-items-center">
+    <div className="d-flex flex-column align-items-center">
       <Slide />
       <div className="mt-2">
         <Card products={itemList} user={user} cart={cart} setCart={setCart} />

@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useRef } from "react"
-import { useHistory, Link } from "react-router-dom"
+import React, { useEffect, useState, useContext } from "react"
+import { Link } from "react-router-dom"
 import { pay } from "../services/product"
 import { updateCart } from "../services/product"
+import { dataContext } from "../context"
 
-const Cart = ({ user, cart, setCart }) => {
-  const history = useHistory()
+const Cart = () => {
+  const { user, cart, setCart } = useContext(dataContext)
   const [html, setHtml] = useState("")
-  const [msg, setMsg] = useState("")
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (document.getElementById("_form_aiochk")) {
@@ -31,7 +32,7 @@ const Cart = ({ user, cart, setCart }) => {
         setHtml(res.data)
       })
       .catch(err => console.log(err))
-    setMsg("請稍候")
+    setLoading(true)
   }
 
   return (
@@ -98,7 +99,11 @@ const Cart = ({ user, cart, setCart }) => {
                 >
                   前往結帳
                 </a>
-                <h2>{msg}</h2>
+                {loading && (
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                )}
               </>
             ) : (
               <>

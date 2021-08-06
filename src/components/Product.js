@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
-import { updateCart, getImage } from "../services/product"
+import { updateCart } from "../services/product"
+import { dataContext } from "../context"
 
-const Product = ({ products, user, cart, setCart }) => {
+const Product = () => {
+  const { products, user, cart, setCart } = useContext(dataContext)
+
   const { _id } = useParams()
   const [item, setItem] = useState()
 

@@ -1,8 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import { updateCart } from "../services/product"
+import { dataContext } from "../context"
 
-const Success = ({ setCart }) => {
+const Success = () => {
+  const { setCart } = useContext(dataContext)
+
   useEffect(() => {
     setCart([])
     updateCart([])

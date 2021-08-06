@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react"
 import { Switch, Route } from "react-router-dom"
 
 import { authCheck } from "./services/auth"
-import { getAllProducts, getCart, updateCart } from "./services/product"
+import { getAllProducts, getCart } from "./services/product"
+import { dataContext } from "./context"
 
 import Nav from "./components/Nav"
 import Home from "./components/Home"
@@ -15,20 +16,17 @@ import Product from "./components/Product"
 
 const App = () => {
   const [user, setUser] = useState()
-  const [auth, setAuth] = useState(false)
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
+  const value = { user, setUser, products, setProducts, cart, setCart }
 
   useEffect(() => {
     authCheck()
- 
       .then(res => {
         setUser(res.data.user)
-        setAuth(true)
       })
       .catch(err => {
         setUser(null)
-        setAuth(false)
       })
   }, [])
   useEffect(() => {
@@ -44,40 +42,32 @@ const App = () => {
   }, [])
 
   return (
-    <div className="h-100">
-      <Nav user={user} auth={auth} setUser={setUser} cart={cart} />
-      <Switch>
-        <Route path="/" exact>
-          <Home products={products} user={user} cart={cart} setCart={setCart} />
-        </Route>
-        <Route path="/cart" exact>
-          <Cart user={user} cart={cart} setCart={setCart} />
-        </Route>
-        <Route path="/success" exact>
-          <Success setCart={setCart} />
-        </Route>
-        <Route path="/product/:category" exact>
-          <Category
-            products={products}
-            user={user}
-            cart={cart}
-            setCart={setCart}
-          />
-        </Route>
-        <Route path="/record" exact>
-          <Record user={user} />
-        </Route>
-        <Route path="/item/:_id" exact>
-          <Product
-            products={products}
-            user={user}
-            cart={cart}
-            setCart={setCart}
-          />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+    <dataContext.Provider value={value}>
+      <div className="h-100">
+        <Nav />
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/cart" exact>
+            <Cart />
+          </Route>
+          <Route path="/success" exact>
+            <Success />
+          </Route>
+          <Route path="/product/:category" exact>
+            <Category />
+          </Route>
+          <Route path="/record" exact>
+            <Record />
+          </Route>
+          <Route path="/item/:_id" exact>
+            <Product />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </dataContext.Provider>
   )
 }
 

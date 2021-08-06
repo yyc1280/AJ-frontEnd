@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import { getRecord } from "../services/product"
+import { dataContext } from "../context"
 
-const Record = ({ user }) => {
+const Record = () => {
+  const { user } = useContext(dataContext)
   const [records, setRecords] = useState([])
   useEffect(() => {
     getRecord()

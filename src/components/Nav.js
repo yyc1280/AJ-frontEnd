@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { logout } from "../services/auth"
+import { dataContext } from "../context"
 
-const Nav = ({ user, auth, setUser, cart }) => {
+const Nav = () => {
+  const { user, setUser, cart } = useContext(dataContext)
+
   const handleLogout = () => {
     logout()
       .then(() => {

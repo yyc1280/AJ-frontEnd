@@ -1,11 +1,13 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { updateCart } from "../services/product"
 import { Link } from "react-router-dom"
+import cartIcon from "../images/cart4.svg"
 
 const Card = ({ products, user, cart, setCart }) => {
   const addToCart = item => {
     if (!user) {
       window.alert("請先登入")
+      window.location = `${process.env.REACT_APP_API_URL}/auth/google`
       return
     }
     const newCart = [...cart, item]
@@ -18,7 +20,7 @@ const Card = ({ products, user, cart, setCart }) => {
       {products.map(p => (
         <div
           key={p._id}
-          className="card text-center m-4"
+          className="card text-center m-3"
           style={{ minWidth: "200px", maxWidth: "200px", border: "none" }}
         >
           <Link to={"/item/" + p._id}>
@@ -32,17 +34,17 @@ const Card = ({ products, user, cart, setCart }) => {
 
           <div className="card-body">
             <h5 className="card-title">{p.name}</h5>
-            <h5 className="card-text">${p.price}</h5>
+            <span className="card-text">${p.price}</span>
 
-            <a
-              href="#"
+            <button
+              style={{ padding: "0 10px 5px 10px", marginLeft: "10px" }}
               className={
                 "btn btn-danger " + (cart.includes(p) ? "disabled" : "")
               }
               onClick={() => addToCart(p)}
             >
-              加入購物車
-            </a>
+              <img style={{ width: "25px" }} src={cartIcon} alt="" />
+            </button>
           </div>
         </div>
       ))}
