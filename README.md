@@ -1,3 +1,12 @@
+This is an E-commerce website using React and Node.js, with google OAuth 2.0 as authentication strategy.
+<br/>
+Users can pay through ECPay(綠界) with a credit card payment method.
+
+![cart](https://github.com/yyc1280/AJ-frontEnd/blob/main/1.png?raw=true)
+![paying](https://github.com/yyc1280/AJ-frontEnd/blob/main/2.png?raw=true)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
