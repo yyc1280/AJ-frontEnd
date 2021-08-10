@@ -25,7 +25,7 @@ const Card = ({ products, user, cart, setCart }) => {
         >
           <Link to={"/item/" + p._id}>
             <img
-              style={{ height: "300px" }}
+              style={{ height: "300px", objectFit: "cover" }}
               src={process.env.REACT_APP_API_URL + "/product/image/" + p._id}
               className="card-img-top"
               alt=""

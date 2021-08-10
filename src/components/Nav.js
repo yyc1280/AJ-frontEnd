@@ -46,7 +46,7 @@ const Nav = () => {
                 aria-current="page"
                 to="/product/dress"
               >
-                洋裝
+                洋裝/套裝
               </Link>
             </li>
             <li className="nav-item">
